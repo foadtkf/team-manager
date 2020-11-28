@@ -66,7 +66,8 @@ public class EditInprogress extends javax.swing.JFrame {
 
         jLabel6.setText("Teammates");
 
-        jButton5.setText("Logout");
+        jButton5.setBackground(new java.awt.Color(255, 0, 0));
+        jButton5.setText("Add to On Hold");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -79,7 +80,8 @@ public class EditInprogress extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setText("Exit");
+        jButton6.setBackground(new java.awt.Color(255, 255, 51));
+        jButton6.setText("Add to Completed");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -137,8 +139,10 @@ public class EditInprogress extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(62, 62, 62)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(439, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -162,18 +166,17 @@ public class EditInprogress extends javax.swing.JFrame {
                                     .addComponent(ends)
                                     .addComponent(teammates))))
                         .addGap(79, 79, 79)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jButton1)
-                                            .addComponent(jButton2))
-                                        .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(234, Short.MAX_VALUE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jButton1)
+                                        .addComponent(jButton2))
+                                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(182, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,16 +226,98 @@ public class EditInprogress extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        new LoginPage().setVisible(true);dispose();
-    }//GEN-LAST:event_jButton5ActionPerformed
+       String sql= "select * from onhold where serial=? ";
+        
+            try{
+                Class.forName("com.mysql.jdbc.Driver");
+            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/tasty","root","1234"); 
+            PreparedStatement pstmt= conn.prepareStatement(sql);
+            pstmt.setString(1,serial.getText());
+            ResultSet rs= pstmt.executeQuery();
+            if(rs.next()){
+                JOptionPane.showMessageDialog(null,"Serial "+"'"+serial.getText()+"'"+" already exist","",JOptionPane.PLAIN_MESSAGE);
+            serial.setText(null);
+            }
+            else{
+            sql= "insert into onhold values (?,?,?,?,?,?)";
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1,serial.getText());
+            pstmt.setString(2,new String(name.getText()));
+            
+            pstmt.setString(3, new String(type.getText()));
+            pstmt.setString(4,new String(starts.getText()));
+            pstmt.setString(5,new String(ends.getText()));
+            pstmt.setString(6,new String(teammates.getText()));
+            pstmt.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Work is added successfully!","Success!",JOptionPane.PLAIN_MESSAGE);  
+ sql="delete from inprogress where serial=?";
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setInt(1,Integer.parseInt(serial.getText()));
+            pstmt.executeUpdate();
+            }
+            conn.close();
+            serial.setText(null);
+            name.setText(null);
+            type.setText(null);
+            starts.setText(null);
+            ends.setText(null);
+            teammates.setText(null);
+            }
+        catch(Exception e){
+        JOptionPane.showMessageDialog(null, e);
+        }
+    }                                        
 
+    /*private void indiActionPerformed(java.awt.event.ActionEvent evt) {                                     
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+*/
     private void serialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serialActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_serialActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        String sql= "select * from completed where serial=? ";
+        
+            try{
+                Class.forName("com.mysql.jdbc.Driver");
+            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/tasty","root","1234"); 
+            PreparedStatement pstmt= conn.prepareStatement(sql);
+            pstmt.setString(1,serial.getText());
+            ResultSet rs= pstmt.executeQuery();
+            if(rs.next()){
+                JOptionPane.showMessageDialog(null,"Serial "+"'"+serial.getText()+"'"+" already exist","",JOptionPane.PLAIN_MESSAGE);
+            serial.setText(null);
+            }
+            else{
+            sql= "insert into completed values (?,?,?,?,?,?)";
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1,serial.getText());
+            pstmt.setString(2,new String(name.getText()));
+            
+            pstmt.setString(3, new String(type.getText()));
+            pstmt.setString(4,new String(starts.getText()));
+            pstmt.setString(5,new String(ends.getText()));
+            pstmt.setString(6,new String(teammates.getText()));
+            pstmt.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Work is added successfully!","Success!",JOptionPane.PLAIN_MESSAGE);  
+ sql="delete from inprogress where serial=?";
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setInt(1,Integer.parseInt(serial.getText()));
+            pstmt.executeUpdate();
+            
+            serial.setText(null);
+            name.setText(null);
+            type.setText(null);
+            starts.setText(null);
+            ends.setText(null);
+            teammates.setText(null);
+            }
+            conn.close();}
+        catch(Exception e){
+        JOptionPane.showMessageDialog(null, e);
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void startsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startsActionPerformed
@@ -251,6 +336,7 @@ public class EditInprogress extends javax.swing.JFrame {
             String sql ="select *from inprogress where serial=?";
             PreparedStatement pstmt=conn.prepareStatement(sql);
             pstmt.setInt(1,Integer.parseInt(serial.getText()));
+            
             ResultSet rs= pstmt.executeQuery();
             if(rs.next()){
                 name.setText(rs.getString("name"));
@@ -301,6 +387,13 @@ public class EditInprogress extends javax.swing.JFrame {
             pstmt.executeUpdate();
             JOptionPane.showMessageDialog(null,"Deleted successfully!","Success!",JOptionPane.PLAIN_MESSAGE);
             conn.close();
+            
+            serial.setText(null);
+            name.setText(null);
+            type.setText(null);
+            starts.setText(null);
+            ends.setText(null);
+            teammates.setText(null);
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
         }

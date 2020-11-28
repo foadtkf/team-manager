@@ -46,6 +46,7 @@ public class Dashboard extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         inprogress = new javax.swing.JButton();
         onhold = new javax.swing.JButton();
@@ -110,24 +111,36 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Viner Hand ITC", 1, 48)); // NOI18N
         jLabel12.setText("Welcome to Team Management");
 
+        jButton6.setBackground(new java.awt.Color(51, 255, 204));
+        jButton6.setText("Refresh");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel12)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton6))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel2.setBackground(new java.awt.Color(51, 255, 255));
 
+        inprogress.setBackground(new java.awt.Color(102, 255, 0));
+        inprogress.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         inprogress.setText("Current works");
         inprogress.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,6 +148,8 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        onhold.setBackground(new java.awt.Color(255, 102, 0));
+        onhold.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         onhold.setText("On Hold");
         onhold.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,6 +157,8 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        completed.setBackground(new java.awt.Color(255, 255, 0));
+        completed.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         completed.setText("Completed");
         completed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,6 +166,8 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        addwork.setBackground(new java.awt.Color(0, 255, 255));
+        addwork.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         addwork.setText("Add an work");
         addwork.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,6 +175,8 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        logout.setBackground(new java.awt.Color(204, 0, 51));
+        logout.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         logout.setText("Logout");
         logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -163,6 +184,8 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        addfriend.setBackground(new java.awt.Color(51, 0, 255));
+        addfriend.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         addfriend.setText("Add friend");
         addfriend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,6 +193,8 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        exit.setBackground(new java.awt.Color(255, 0, 51));
+        exit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         exit.setText("Exit");
         exit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,6 +202,8 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        about.setBackground(new java.awt.Color(255, 255, 204));
+        about.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         about.setText("About");
         about.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,13 +258,15 @@ public class Dashboard extends javax.swing.JFrame {
         );
         jdefaultLayout.setVerticalGroup(
             jdefaultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 450, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 470, Short.MAX_VALUE)
         );
 
         jPanel3.add(jdefault, "card2");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("On Hold list: ");
+
+        jTable1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
 
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, onholdList, jTable1);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${serial}"));
@@ -290,7 +319,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addComponent(jButton1))
         );
 
@@ -298,6 +327,8 @@ public class Dashboard extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Completed list:");
+
+        jTable2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
 
         jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, completedList, jTable2);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${serial}"));
@@ -356,6 +387,8 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Current works list:");
 
+        jTable3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+
         jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, inprogressList, jTable3);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${serial}"));
         columnBinding.setColumnName("Serial");
@@ -404,7 +437,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addComponent(jButton3))
         );
 
@@ -572,13 +605,16 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGroup(jaddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
                     .addComponent(jButton5))
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addContainerGap(167, Short.MAX_VALUE))
         );
 
         jPanel3.add(jadd, "card6");
 
+        jfriend.setBackground(new java.awt.Color(102, 102, 255));
+        jfriend.setForeground(new java.awt.Color(102, 102, 255));
+
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel13.setForeground(new java.awt.Color(51, 51, 51));
         jLabel13.setText("This feature will be available soon!");
 
         javax.swing.GroupLayout jfriendLayout = new javax.swing.GroupLayout(jfriend);
@@ -595,10 +631,12 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(jfriendLayout.createSequentialGroup()
                 .addGap(170, 170, 170)
                 .addComponent(jLabel13)
-                .addContainerGap(264, Short.MAX_VALUE))
+                .addContainerGap(278, Short.MAX_VALUE))
         );
 
         jPanel3.add(jfriend, "card7");
+
+        jabout.setBackground(new java.awt.Color(255, 255, 204));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel14.setText("Team Management will be a best management tool one day...");
@@ -607,7 +645,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         jLabel16.setText("Facebook messenger, Whatsapp etc to communicate, Google drive to share various kinds of files with teammates from long distance etc. How it will look like, if an user become able to do all the works");
 
-        jLabel17.setText("with just a single tool? In one word, the answer will be \"cool!\". With team management, we will provide the chatting feature with an online storage to store and share files between teammates in ");
+        jLabel17.setText("with just a single tool? In one word, the answer will be \"cool!\" right? With team management, we will provide the chatting feature with an online storage to store and share files between teammates in ");
 
         jLabel18.setText("the future. An user with Team management software will never forget about any of his works which is added in the progress list. Everyday, user will get notification(can also say reminder) about");
 
@@ -625,7 +663,7 @@ public class Dashboard extends javax.swing.JFrame {
                     .addComponent(jLabel17)
                     .addComponent(jLabel18)
                     .addComponent(jLabel19))
-                .addGap(0, 35, Short.MAX_VALUE))
+                .addGap(0, 30, Short.MAX_VALUE))
         );
         jaboutLayout.setVerticalGroup(
             jaboutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -642,7 +680,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel19)
-                .addContainerGap(255, Short.MAX_VALUE))
+                .addContainerGap(269, Short.MAX_VALUE))
         );
 
         jPanel3.add(jabout, "card8");
@@ -909,6 +947,11 @@ public class Dashboard extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_teamActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        new Dashboard().setVisible(true);dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -965,6 +1008,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

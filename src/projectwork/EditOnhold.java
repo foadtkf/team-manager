@@ -66,7 +66,8 @@ public class EditOnhold extends javax.swing.JFrame {
 
         jLabel6.setText("Teammates");
 
-        jButton5.setText("Logout");
+        jButton5.setBackground(new java.awt.Color(153, 255, 0));
+        jButton5.setText("Add to InProgress");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -137,8 +138,10 @@ public class EditOnhold extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(62, 62, 62)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(306, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -171,9 +174,9 @@ public class EditOnhold extends javax.swing.JFrame {
                                             .addComponent(jButton2))
                                         .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(113, Short.MAX_VALUE))
+                                .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton5))
+                        .addContainerGap(61, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,7 +226,47 @@ public class EditOnhold extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        new LoginPage().setVisible(true);dispose();
+        String sql= "select * from inprogress where serial=? ";
+        
+            try{
+                Class.forName("com.mysql.jdbc.Driver");
+            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/tasty","root","1234"); 
+            PreparedStatement pstmt= conn.prepareStatement(sql);
+            pstmt.setString(1,serial.getText());
+            ResultSet rs= pstmt.executeQuery();
+            if(rs.next()){
+                JOptionPane.showMessageDialog(null,"Serial "+"'"+serial.getText()+"'"+" already exist","",JOptionPane.PLAIN_MESSAGE);
+            serial.setText(null);
+            }
+            else{
+            sql= "insert into inprogress values (?,?,?,?,?,?)";
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1,serial.getText());
+            pstmt.setString(2,new String(name.getText()));
+            
+            pstmt.setString(3, new String(type.getText()));
+            pstmt.setString(4,new String(starts.getText()));
+            pstmt.setString(5,new String(ends.getText()));
+            pstmt.setString(6,new String(teammates.getText()));
+            pstmt.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Work is added successfully!","Success!",JOptionPane.PLAIN_MESSAGE);  
+ sql="delete from onhold where serial=?";
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setInt(1,Integer.parseInt(serial.getText()));
+            pstmt.executeUpdate();
+            }
+            conn.close();
+            
+            serial.setText(null);
+            name.setText(null);
+            type.setText(null);
+            starts.setText(null);
+            ends.setText(null);
+            teammates.setText(null);
+            }
+        catch(Exception e){
+        JOptionPane.showMessageDialog(null, e);
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void serialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serialActionPerformed
@@ -300,6 +343,12 @@ public class EditOnhold extends javax.swing.JFrame {
             pstmt.executeUpdate();
             JOptionPane.showMessageDialog(null,"Deleted successfully!","Success!",JOptionPane.PLAIN_MESSAGE);
             conn.close();
+            serial.setText(null);
+            name.setText(null);
+            type.setText(null);
+            starts.setText(null);
+            ends.setText(null);
+            teammates.setText(null);
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
         }

@@ -117,7 +117,7 @@ public class LoginPage extends javax.swing.JFrame {
 
         jbtnreset.setBackground(new java.awt.Color(255, 255, 0));
         jbtnreset.setFont(new java.awt.Font("Arial Black", 0, 38)); // NOI18N
-        jbtnreset.setText("Reset");
+        jbtnreset.setText("Clear");
         jbtnreset.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jbtnreset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
