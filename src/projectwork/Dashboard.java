@@ -1,7 +1,20 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+####After a successful login, user will be directed to this page####
+***I've used multiple panels at one place and used the card layout to show them all look like default panel***
+Different field variable names:
+Current works: inprogress
+On Hold: onhold
+Completed: completed
+Add an work: addwork
+Add Friend: addfriend
+About: about
+Logout: logout
+Exit: exit
+MysQl database table names: Schema name is "tasty" for all tables
+Current works: inprogress
+On Hold: onhold
+Completed: completed
+Refresh: jButton6
  */
 package projectwork;
 
@@ -96,6 +109,7 @@ public class Dashboard extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jfriend = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
         jabout = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -617,6 +631,9 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(51, 51, 51));
         jLabel13.setText("This feature will be available soon!");
 
+        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel20.setText("Add friends: ");
+
         javax.swing.GroupLayout jfriendLayout = new javax.swing.GroupLayout(jfriend);
         jfriend.setLayout(jfriendLayout);
         jfriendLayout.setHorizontalGroup(
@@ -625,11 +642,16 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel13)
                 .addContainerGap(665, Short.MAX_VALUE))
+            .addGroup(jfriendLayout.createSequentialGroup()
+                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jfriendLayout.setVerticalGroup(
             jfriendLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jfriendLayout.createSequentialGroup()
-                .addGap(170, 170, 170)
+                .addContainerGap()
+                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64)
                 .addComponent(jLabel13)
                 .addContainerGap(278, Short.MAX_VALUE))
         );
@@ -1021,6 +1043,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

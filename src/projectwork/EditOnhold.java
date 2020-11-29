@@ -1,7 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ ###This page will open if user presses the "edit" button of the On Hold page###
+Different field variable names:
+Serial: serial
+Name: name
+Type: type
+Starting: starts
+Ending: ends
+Teammates: teammates
+Search: jButton1
+Update: jButton2
+Delete: jButton3
+Home: jButton4
+Add to inprogress: jButton5
+Exit: jButton6
  */
 package projectwork;
 

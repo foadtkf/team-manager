@@ -1,3 +1,16 @@
+/*
+#####This is the main page of my project#####
+Differernt field variable names:
+Username: jTextField1
+Password: jPasswordField1
+Login Button: jbtnlogin
+Clear Button: jbtnreset
+Exit Button: jbtnexit
+MysQl database table names: Schema name is "tasty" for all tables
+User info table: login
+Not registered yet? Register here: jButton1
+*/
+
 package projectwork;
 import java.sql.*;
 

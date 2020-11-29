@@ -1,7 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+####This page will be open if user presses on the blue button located on the bottom of the login page####
+Different field variable names:
+Username: jTextField1
+Password: jTextField2
+Retype Pass: jTextField3
+Register: jButton1
+Clear: jButton2
+Already have an ID? Go to Login Page: jButton3
  */
 package projectwork;
 
